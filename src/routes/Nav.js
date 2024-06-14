@@ -8,6 +8,7 @@ export const Nav = () => {
         {/* Products page is HOME component */}
         <a href="/">Products</a> {" | "}
         <a href="/account">Account</a> {" | "}
+        <a href="/register">Register</a> {" | "}
         <a href="/about">About</a> {" | "}
         <a href="/auth">Login</a>
       </nav>
