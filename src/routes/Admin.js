@@ -1,3 +1,32 @@
+// import "../css/Admin.css";
+import { Tabs } from "../components/Tabs";
+// import { Orders } from "../components/Orders";
+import { ProductsList } from "../components/ProductsList";
+// import { CreateNewAdminForm } from "../forms/CreateNewAdminForm";
+// import { AdminCreateProductForm } from "../forms/AdminCreateProductForm";
+import { logout } from "../services/fetch-utils";
+
 export const Admin = () => {
-  return <h1>Admin</h1>;
+  const admin = {
+    tabs: ["Product List"],
+    // tabs: [
+    //   "Product List",
+    //   "Create New Product",
+    //   "Add Admin",
+    //   "Orders",
+    //   "LogOut",
+    // ],
+    content: [
+      <ProductsList />,
+      //   <AdminCreateProductForm />,
+      //   <CreateNewAdminForm />,
+      //   <Orders />,
+      <button onClick={() => logout()}>LogOut</button>,
+    ],
+  };
+  return (
+    <div className="admin-container">
+      <Tabs page={admin} />
+    </div>
+  );
 };
