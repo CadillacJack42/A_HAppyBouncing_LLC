@@ -8,6 +8,7 @@ import Login from "./auth/Login";
 import { Detail } from "./routes/Detail";
 import { CartProvider } from "./context/CartProvider";
 import { Cart } from "./routes/Cart";
+import { About } from "./routes/About";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/detail/:id" element={<Detail />} />
             <Route path="/cart" element={<Cart />} />
+            <Route path="/about" element={<About />} />
           </Route>
         </Routes>
       </BrowserRouter>
