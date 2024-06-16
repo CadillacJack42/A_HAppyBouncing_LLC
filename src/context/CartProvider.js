@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+import { toast } from "react-hot-toast";
 
 export const CartContext = createContext(null);
 
@@ -16,7 +17,6 @@ export const CartProvider = ({ children }) => {
     }
 
     const idArray = cart.map((item) => item.id);
-    // console.log(idArray);
 
     if (!idArray.includes(newItem.id)) {
       newItem.quantity = 1;
@@ -25,6 +25,7 @@ export const CartProvider = ({ children }) => {
       cart[idArray.indexOf(newItem.id)].quantity++;
       setCart([...cart]);
     }
+    toast.success(`${newItem.name} has been added to your cart`);
   };
 
   const decrementCartItem = (itemToDecrement) => {
@@ -43,11 +44,14 @@ export const CartProvider = ({ children }) => {
       }
     });
     setCart([...filteredCart]);
+    toast.success(`${itemToDecrement.name} has been removed from cart`);
   };
 
   const removeFromCart = (i) => {
+    console.log("CART IN REMOVE", cart);
     cart.splice(i, 1);
     cart.length > 0 ? setCart([...cart]) : setCart([]);
+    toast.success(`Cart has been updated`);
   };
 
   const cartCount = () => {

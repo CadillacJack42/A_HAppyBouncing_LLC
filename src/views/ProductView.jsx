@@ -2,6 +2,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useCart } from "../hooks/useCart";
 import "../css/ProductView.css";
 import { deleteProductById } from "../services/fetch-utils";
+import { toast } from "react-hot-toast";
 
 export const ProductView = ({ product, refresh }) => {
   const location = useLocation();
@@ -19,10 +20,14 @@ export const ProductView = ({ product, refresh }) => {
     addToCart(product);
   };
   const handleAdminItemDelete = () => {
-    deleteProductById(product.id).then((res) =>
-      console.log("RESPONSE FROM DELETE", res)
+    const imageNameSplit = product.image.split("/");
+    // console.log("SPLIT IMAGE STRING", imageName[imageName.length - 1]);
+    const image = imageNameSplit[imageNameSplit.length - 1];
+
+    deleteProductById(product.id, image).then((res) =>
+      toast.success("Item Deleted")
     );
-    // deleteProductById(product.id).then(() => populateList());
+    navigate("/admin");
   };
   return (
     <div className="product-view-card-container">
@@ -51,7 +56,12 @@ export const ProductView = ({ product, refresh }) => {
         </span>
       )}
       {!isAdminPage && (
-        <button onClick={(e) => handleAddCartItem()}>Add to Cart</button>
+        <button
+          className="add-to-cart-button"
+          onClick={(e) => handleAddCartItem()}
+        >
+          Add to Cart
+        </button>
       )}
     </div>
   );

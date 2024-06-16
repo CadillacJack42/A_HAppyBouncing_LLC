@@ -7,9 +7,15 @@ import { AdminCreateProductForm } from "../forms/AdminCreateProductForm";
 import { logout } from "../services/fetch-utils";
 import Register from "../auth/Register";
 import { useNavigate } from "react-router-dom";
+import { useUser } from "../hooks/useUser";
 
 export const Admin = () => {
+  const { user } = useUser();
   const navigate = useNavigate();
+
+  if (user?.role !== "authenticated") {
+    navigate("/login");
+  }
 
   const handleLogout = () => {
     logout();

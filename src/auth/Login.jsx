@@ -19,16 +19,16 @@ function Login() {
     setPassword(e.target.value);
   };
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e?.preventDefault();
 
     try {
-      signInUser(email, password);
-      navigate("/admin");
+      await signInUser(email, password);
     } catch (error) {
       console.log("AN ERROR HASS OCCURED IN LOGIN", error);
     }
     // console.log("USER FROM HANDLE LOGIN", user);
+    navigate("/admin");
   };
 
   return (
@@ -59,7 +59,6 @@ function Login() {
         </label>
         <button className="auth-form-submit-button">Login</button>
       </form>
-      <Link to="/register">Click Here To Register</Link>
     </div>
   );
 }

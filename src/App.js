@@ -30,9 +30,9 @@ function App() {
         <Routes>
           <Route path="/" element={<Nav />}>
             <Route path="/" element={<Home />} />
-            <Route path="/admin" element={admin ? <Admin /> : <Login />} />
-            <Route path="/register" element={<Register />} />
+            <Route path="/admin" element={<Admin />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
             <Route path="/detail/:id" element={<Detail />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/about" element={<About />} />

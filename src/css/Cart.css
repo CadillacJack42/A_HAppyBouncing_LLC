@@ -6,7 +6,7 @@
 }
 
 .cart-item-view {
-  width: 24%;
+  width: 100%;
 }
 
 .cart-bill-display {
@@ -23,7 +23,7 @@
 .cart-items-container {
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
+  /* flex-wrap: wrap; */
   width: 50%;
   justify-content: center;
   align-items: center;
