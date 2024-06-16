@@ -1,24 +1,27 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { useCart } from "../hooks/useCart";
 import "../css/ProductView.css";
-// import { deleteProductById } from "../services/fetch-utils";
+import { deleteProductById } from "../services/fetch-utils";
 
 export const ProductView = ({ product, refresh }) => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { addToCart } = useCart();
+  const { addToCart, cart } = useCart();
   const detailPage = new RegExp("^/detail/[0-9]*$");
   const isDetailPage = detailPage.test(location.pathname);
   const isAdminPage = location.pathname === "/admin" ? true : false;
   const handleClick = () => {
     !isDetailPage &&
       !isAdminPage &&
-      navigate(`/detail/${product.id}`, { state: { product } });
+      navigate(`/detail/${product.id}`, { state: { product, cart } });
   };
   const handleAddCartItem = () => {
     addToCart(product);
   };
   const handleAdminItemDelete = () => {
+    deleteProductById(product.id).then((res) =>
+      console.log("RESPONSE FROM DELETE", res)
+    );
     // deleteProductById(product.id).then(() => populateList());
   };
   return (
@@ -33,6 +36,11 @@ export const ProductView = ({ product, refresh }) => {
       <p className="product-view-card-description product-view-p">
         {product.description}
       </p>
+      {isDetailPage && (
+        <p className="product-view-card-price product-view-p">
+          Dimensions: {product.dimensions}
+        </p>
+      )}
       <p className="product-view-card-price product-view-p">
         Price : ${product.price}
       </p>

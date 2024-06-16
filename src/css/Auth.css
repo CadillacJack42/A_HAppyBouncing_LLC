@@ -1,0 +1,35 @@
+.auth-container {
+  position: relative;
+  top: 15%;
+  text-align: center;
+}
+
+.auth-form-container {
+  margin: auto;
+  width: 50%;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  margin-right: 25%;
+}
+
+.auth-form-title {
+  margin: 0;
+  font-weight: 700;
+}
+
+.auth-form-input {
+  margin: 5px;
+}
+
+.auth-form-input-label {
+  font-weight: 500;
+}
+
+.auth-form-submit-button {
+  margin: inherit;
+}

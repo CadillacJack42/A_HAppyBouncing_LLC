@@ -1,6 +1,31 @@
 import { client } from "./client";
 import { stringParser } from "./stringParser";
 
+export const fetchUser = () => {
+  // Check for cookie set in UserProvider
+  const cookieAuth = document?.cookie || null;
+  const cookies = cookieAuth ? stringParser(document?.cookie) : {};
+  const refreshToken = cookies["my-refresh-token"];
+  const accessToken = cookies["my-access-token"];
+
+  // If user has valid cookies, update user session
+  if (refreshToken && accessToken) {
+    client.auth.setSession({
+      refresh_token: refreshToken,
+      access_token: accessToken,
+    });
+  } else {
+    // make sure you handle this case!
+    console.log("YOU ARE NOT LOGGED IN");
+    throw new Error("User is not authenticated.");
+  }
+
+  // console.log("CLIENT>AUTH>USER", client.auth);
+
+  // returns user information
+  return client.auth.getUser();
+};
+
 export const signUpUser = async (email, password) => {
   const response = await client.auth.signUp({ email, password });
   console.log("RESPONSE FROM SIGNUP", response);
@@ -8,7 +33,8 @@ export const signUpUser = async (email, password) => {
 };
 
 export const signInUser = async (email, password) => {
-  const response = await client.auth.signIn({ email, password });
+  const response = await client.auth.signInWithPassword({ email, password });
+  console.log("RESPONSE FROM SIGN IN", response);
   return response.user;
 };
 // export const signup = async (email, password) => {

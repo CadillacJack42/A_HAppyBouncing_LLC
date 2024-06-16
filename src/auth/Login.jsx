@@ -24,7 +24,7 @@ function Login() {
 
     try {
       signInUser(email, password);
-      navigate("/");
+      navigate("/admin");
     } catch (error) {
       console.log("AN ERROR HASS OCCURED IN LOGIN", error);
     }

@@ -1,5 +1,5 @@
 import { CartBillDisplay } from "../components/CartBillDisplay";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { ProductView } from "../views/ProductView";
 import { useEffect, useState } from "react";
 import { useCart } from "../hooks/useCart";
@@ -10,6 +10,7 @@ export const Cart = () => {
   const { cart, removeFromCart, clearCart } = useCart();
   const [totalPrice, setTotalPrice] = useState(0);
   const [stripeServiceFee, setStripeServiceFee] = useState(0);
+  //   const location = useLocation();
 
   const navigate = useNavigate();
 
@@ -31,6 +32,10 @@ export const Cart = () => {
     const response = Checkout(cart);
     console.log("RESPONSE FROM HANDLE CHECK OUT", response);
   };
+
+  //   useEffect(() => {
+  //     location.state.cart = cart;
+  //   }, [cart]);
 
   return (
     <div className="cart-container">

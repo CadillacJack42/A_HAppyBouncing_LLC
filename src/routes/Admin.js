@@ -3,25 +3,37 @@ import { Tabs } from "../components/Tabs";
 // import { Orders } from "../components/Orders";
 import { ProductsList } from "../components/ProductsList";
 // import { CreateNewAdminForm } from "../forms/CreateNewAdminForm";
-// import { AdminCreateProductForm } from "../forms/AdminCreateProductForm";
+import { AdminCreateProductForm } from "../forms/AdminCreateProductForm";
 import { logout } from "../services/fetch-utils";
+import Register from "../auth/Register";
+import { useNavigate } from "react-router-dom";
 
 export const Admin = () => {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate("/");
+  };
+
   const admin = {
-    tabs: ["Product List"],
+    tabs: [
+      "Product List",
+      "Create New Product",
+      "Register New Admin",
+      "Logout",
+    ],
     // tabs: [
     //   "Product List",
     //   "Create New Product",
-    //   "Add Admin",
-    //   "Orders",
+    //   "Reservations",
     //   "LogOut",
     // ],
     content: [
       <ProductsList />,
-      //   <AdminCreateProductForm />,
-      //   <CreateNewAdminForm />,
-      //   <Orders />,
-      <button onClick={() => logout()}>LogOut</button>,
+      <AdminCreateProductForm />,
+      <Register />,
+      <button onClick={handleLogout}>LogOut</button>,
     ],
   };
   return (

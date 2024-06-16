@@ -1,9 +1,11 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 
 export const CartContext = createContext(null);
 
 export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
+  const location = useLocation();
 
   const clearCart = () => setCart([]);
 
@@ -54,6 +56,17 @@ export const CartProvider = ({ children }) => {
     }, 0);
     return count;
   };
+
+  useEffect(() => {
+    if (location.state?.cart.length > 0) {
+      setCart(location.state.cart);
+    }
+  }, []);
+
+  useEffect(() => {
+    location.state = { ...location.state, cart };
+    console.log("IS THIS WORKING??", location.state);
+  }, [cart]);
 
   return (
     <CartContext.Provider

@@ -1,23 +1,36 @@
 import "./App.css";
-import { Nav } from "./routes/Nav";
-import { Home } from "./routes/Home";
-import { Admin } from "./routes/Admin";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Register from "./auth/Register";
 import Login from "./auth/Login";
-import { Detail } from "./routes/Detail";
-import { CartProvider } from "./context/CartProvider";
+import { Nav } from "./routes/Nav";
 import { Cart } from "./routes/Cart";
+import { Home } from "./routes/Home";
 import { About } from "./routes/About";
+import { Admin } from "./routes/Admin";
+import Register from "./auth/Register";
+import { Detail } from "./routes/Detail";
+import { Toaster } from "react-hot-toast";
+import { CartProvider } from "./context/CartProvider";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { useUser } from "./hooks/useUser";
+import { useEffect, useState } from "react";
 
 function App() {
+  const { user } = useUser();
+  const [admin, setAdmin] = useState(false);
+
+  useEffect(() => {
+    if (user?.role === "authenticated") {
+      setAdmin(true);
+    }
+  }, [user]);
+
   return (
-    <CartProvider>
-      <BrowserRouter>
+    <BrowserRouter>
+      <CartProvider>
+        <Toaster />
         <Routes>
           <Route path="/" element={<Nav />}>
             <Route path="/" element={<Home />} />
-            <Route path="/admin" element={<Admin />} />
+            <Route path="/admin" element={admin ? <Admin /> : <Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
             <Route path="/detail/:id" element={<Detail />} />
@@ -25,8 +38,8 @@ function App() {
             <Route path="/about" element={<About />} />
           </Route>
         </Routes>
-      </BrowserRouter>
-    </CartProvider>
+      </CartProvider>
+    </BrowserRouter>
   );
 }
 
