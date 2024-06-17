@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { ProductView } from "../views/ProductView";
 import "../css/Detail.css";
+import { RenderCalendar } from "../calendar/RenderCalendar";
 
 export const Detail = () => {
   const location = useLocation();
@@ -21,6 +22,7 @@ export const Detail = () => {
       <h1>Detail Page</h1>
       <p>Product display with details and add to cart function</p>
       {product && <ProductView product={product} />}
+      <RenderCalendar />
     </div>
   );
 };

@@ -154,7 +154,6 @@ export const insertProduct = async (data, media) => {
 };
 
 const deleteProductImageFromBucket = async (image) => {
-  console.log("IMAGE IN REMOVE IMAGE", image);
   const response = await client.storage.from("product_images").remove([image]);
   console.log("RESPONSE FROM IMAGE DELETE", response);
   return response;

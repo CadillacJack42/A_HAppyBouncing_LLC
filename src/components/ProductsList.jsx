@@ -19,7 +19,15 @@ export const ProductsList = () => {
 
   return (
     <div className="products-list-tab">
-      <h1>Products</h1>
+      <h3>Select a date to see available supplies</h3>
+      <input
+        type="date"
+        id="party-date"
+        name="selected-date"
+        // value={new Date()}
+        min={new Date()}
+      />
+
       <label htmlFor="filter-dropdown-element">Filter Products: </label>
       <select
         name="product-filter"

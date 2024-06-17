@@ -12,34 +12,40 @@ import { CartProvider } from "./context/CartProvider";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { useUser } from "./hooks/useUser";
 import { useEffect, useState } from "react";
+import { CalendarProvider } from "./context/CalendarProvider";
+import { UserProvider } from "./context/UserProvider";
 
 function App() {
-  const { user } = useUser();
-  const [admin, setAdmin] = useState(false);
+  // const { user } = useUser();
+  // const [admin, setAdmin] = useState(false);
 
-  useEffect(() => {
-    if (user?.role === "authenticated") {
-      setAdmin(true);
-    }
-  }, [user]);
+  // useEffect(() => {
+  //   if (user?.role === "authenticated") {
+  //     setAdmin(true);
+  //   }
+  // }, [user]);
 
   return (
-    <BrowserRouter>
-      <CartProvider>
-        <Toaster />
-        <Routes>
-          <Route path="/" element={<Nav />}>
-            <Route path="/" element={<Home />} />
-            <Route path="/admin" element={<Admin />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/detail/:id" element={<Detail />} />
-            <Route path="/cart" element={<Cart />} />
-            <Route path="/about" element={<About />} />
-          </Route>
-        </Routes>
-      </CartProvider>
-    </BrowserRouter>
+    <UserProvider>
+      <BrowserRouter>
+        <CalendarProvider>
+          <CartProvider>
+            <Toaster />
+            <Routes>
+              <Route path="/" element={<Nav />}>
+                <Route path="/" element={<Home />} />
+                <Route path="/admin" element={<Admin />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
+                <Route path="/detail/:id" element={<Detail />} />
+                <Route path="/cart" element={<Cart />} />
+                <Route path="/about" element={<About />} />
+              </Route>
+            </Routes>
+          </CartProvider>
+        </CalendarProvider>
+      </BrowserRouter>
+    </UserProvider>
   );
 }
 

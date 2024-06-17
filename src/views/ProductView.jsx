@@ -21,7 +21,6 @@ export const ProductView = ({ product, refresh }) => {
   };
   const handleAdminItemDelete = () => {
     const imageNameSplit = product.image.split("/");
-    // console.log("SPLIT IMAGE STRING", imageName[imageName.length - 1]);
     const image = imageNameSplit[imageNameSplit.length - 1];
 
     deleteProductById(product.id, image).then((res) =>
